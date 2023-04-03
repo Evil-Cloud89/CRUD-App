@@ -1,5 +1,5 @@
 const initialState = {
-    blank: [],
+    posts: [],
 };
 
 export default initialState;
