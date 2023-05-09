@@ -4,6 +4,7 @@ import { getPostById, removePost } from "../../../redux/postsRedux";
 import { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
 import { DateToStr } from "../../../utils/dateToStr";
+import { getCategoryById } from "../../../redux/categoriesRedux";
 
 const Post = props => {
 
@@ -15,6 +16,7 @@ const Post = props => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true)
 
+  const category = useSelector(categories => getCategoryById(categories, postData.categoryId)).name;
 
   const dispatch = useDispatch();
 
@@ -36,8 +38,8 @@ const Post = props => {
           </div>
         </div>
         <p><b>Author: </b>{postData.author}
-        <br/><b>Published: </b>
-        {DateToStr(postData.publishedDate)}</p>
+        <br/><b>Published: </b>{DateToStr(postData.publishedDate)}
+        <br/><b>Category: </b>{category}</p>
         <p dangerouslySetInnerHTML={{ __html: postData.content }}></p>
 
         <Modal show={show} onHide={handleClose}>
